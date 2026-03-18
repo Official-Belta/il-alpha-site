@@ -139,15 +139,25 @@
   .comp-table .ours .action { color: var(--accent); }
   .comp-table .ours .result { color: var(--accent); font-weight: 700; font-size: 16px; }
 
-  .log-day { padding: 48px 0; border-top: 1px solid var(--gray-200); }
-  .log-date { font-family: var(--mono); font-size: 13px; color: var(--gray-500); letter-spacing: 0.06em; margin-bottom: 32px; }
-  .log-entries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  @media (max-width: 768px) { .log-entries { grid-template-columns: 1fr; } }
-  .log-entry { padding: 28px; background: var(--gray-100); border-radius: 8px; }
-  .log-cat { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 12px; }
-  .log-title { font-family: var(--sans); font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.3; }
+  .log-section { background: var(--black); color: var(--white); padding: 96px 48px; }
+  @media (max-width: 640px) { .log-section { padding: 64px 24px; } }
+  .log-section .section-eyebrow::after { background: var(--gray-700); }
+  .log-day { margin-bottom: 56px; }
+  .log-date { font-family: var(--serif); font-size: 28px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 32px; color: var(--white); }
+  .log-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; overflow: hidden; }
+  @media (max-width: 768px) { .log-cards { grid-template-columns: 1fr; } }
+  .log-card { padding: 32px; background: var(--gray-900); transition: background 300ms var(--ease); cursor: pointer; text-decoration: none; color: inherit; display: block; }
+  .log-card:hover { background: var(--gray-800); }
+  .log-cat { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 14px; }
+  .log-card-title { font-family: var(--sans); font-size: 18px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; line-height: 1.3; color: var(--white); }
+  .log-card-summary { font-size: 14px; color: var(--gray-400); line-height: 1.6; }
+  .log-card-arrow { font-family: var(--mono); font-size: 13px; color: var(--gray-500); margin-top: 16px; transition: color 200ms var(--ease); }
+  .log-card:hover .log-card-arrow { color: var(--accent); }
+  .log-filters { display: flex; gap: 8px; margin-bottom: 32px; }
+  .log-filter { font-family: var(--mono); font-size: 12px; color: var(--gray-500); background: transparent; border: 1px solid rgba(255,255,255,0.08); border-radius: 100px; padding: 6px 16px; cursor: pointer; transition: all 200ms var(--ease); }
+  .log-filter:hover, .log-filter.active { color: var(--white); border-color: rgba(255,255,255,0.2); }
   .log-items { padding-left: 18px; display: flex; flex-direction: column; gap: 10px; }
-  .log-items li { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+  .log-items li { font-size: 15px; color: var(--gray-400); line-height: 1.65; }
 
   .cta { background: var(--black); color: var(--white); padding: 120px 48px; }
   @media (max-width: 640px) { .cta { padding: 80px 24px; } }
@@ -200,7 +210,7 @@
   <div class="metrics-row">
     <div class="reveal">
       <div class="metric-label" data-ko="페이즈">Phase</div>
-      <div class="metric-value">3 of 7</div>
+      <div class="metric-value">3 of 9</div>
     </div>
     <div class="reveal">
       <div class="metric-label" data-ko="통과 테스트">Tests Passing</div>
@@ -214,6 +224,37 @@
       <div class="metric-label" data-ko="네트워크">Network</div>
       <div class="metric-value">Sepolia</div>
     </div>
+  </div>
+</section>
+
+<section class="log-section" id="log">
+  <div class="section-inner">
+    <div class="section-eyebrow" data-ko="빌드 로그">Build Log</div>
+    <h2 class="section-title reveal" data-ko="오늘 우리가 한 일">What we shipped</h2>
+    
+        <div class="log-day reveal">
+          <div class="log-date">2026-03-19</div>
+          <div class="log-cards">
+            <a class="log-card" href="log/2026-03-19.html#dev">
+              <div class="log-cat" data-ko="개발">Development</div>
+              <div class="log-card-title" data-ko="Phase 2 → 3 완료. LP 활성화 성공.">Phase 2 → 3 Complete. LP Activated.</div>
+              <div class="log-card-summary" data-ko="솔리디티 컨트랙트 완성. Sepolia 배포. 키퍼 봇 가동. 최초 온체인 LP 활성화.">Solidity contracts shipped. Sepolia deployed. Keeper bot live. First LP activation on-chain.</div>
+              <div class="log-card-arrow" data-ko="자세히 보기 &rarr;">Read more &rarr;</div>
+            </a>
+            <a class="log-card" href="log/2026-03-19.html#strategy">
+              <div class="log-cat" data-ko="전략">Strategy</div>
+              <div class="log-card-title" data-ko="포지셔닝 확정. Arrakis 분석 완료.">Positioning Locked. Arrakis Analyzed.</div>
+              <div class="log-card-summary" data-ko="프로덕트 포지셔닝 확정. 경쟁사 분석 완료. 수수료 구조 및 GTM 전략 확정.">Product positioning defined. Competitive analysis complete. Fee structure and go-to-market locked.</div>
+              <div class="log-card-arrow" data-ko="자세히 보기 &rarr;">Read more &rarr;</div>
+            </a>
+            <a class="log-card" href="log/2026-03-19.html#design">
+              <div class="log-cat" data-ko="디자인 &amp; 홍보">Design &amp; Marketing</div>
+              <div class="log-card-title" data-ko="디자인 시스템 + 공개 사이트 라이브.">Design System + Public Site Live.</div>
+              <div class="log-card-summary" data-ko="Blackstone 스타일 디자인 시스템. 마일스톤 사이트 배포. 브랜드명 IL Alpha로 변경.">Blackstone-inspired design system. Milestone site deployed. Brand renamed to IL Alpha.</div>
+              <div class="log-card-arrow" data-ko="자세히 보기 &rarr;">Read more &rarr;</div>
+            </a>
+          </div>
+        </div>
   </div>
 </section>
 
@@ -299,11 +340,49 @@
           <div class="phase-status status-wait" data-ko="예정">Upcoming</div>
         </div>
         <div class="phase-body">
-          <p class="phase-desc" data-ko="멀티풀 확장. DAO 트레저리 및 토큰 프로젝트와의 기관 파트너십. 수익률 애그리게이터 통합.">Multi-pool expansion. Institutional partnerships with DAO treasuries and token projects. Yield aggregator integrations.</p>
+          <p class="phase-desc" data-ko="안전한 페어부터 멀티풀 확장. DAO 트레저리 및 신규 토큰 프로젝트 B2B 파트너십. 수익률 애그리게이터 통합.">Multi-pool expansion starting with safest pairs. B2B partnerships with DAO treasuries and new token projects. Yield aggregator integrations.</p>
           <div class="items">
-            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending" data-ko="멀티풀: wstETH/ETH, USDC/USDT, ETH/USDC">Multi-pool: wstETH/ETH, USDC/USDT, ETH/USDC</div></div></div>
-            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending" data-ko="DAO 트레저리 파트너십">DAO treasury partnerships</div></div></div>
-            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending" data-ko="수익률 애그리게이터 통합">Yield aggregator integrations</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">wstETH/ETH pool (safest: high correlation, minimal IL)</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">USDC/USDT stablepair (IL ≈ 0, pure fee farming)</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">ETH/USDC pool (high vol = maximum strategy value)</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">New token project partnerships (highest ROI segment)</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">DAO treasury partnerships ($10M+ idle capital)</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">Yield aggregator integrations (Yearn, Beefy)</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase reveal">
+        <div>
+          <div class="phase-label" data-ko="페이즈 06">Phase 06</div>
+          <div class="phase-name" data-ko="해자 구축">Moat Building</div>
+          <div class="phase-status status-wait" data-ko="예정">Upcoming</div>
+        </div>
+        <div class="phase-body">
+          <p class="phase-desc" data-ko="런타임 데이터 우위. EWMA 너머 커스텀 변동성 모델. V4 훅 생태계 선점. 지속적 감사 신뢰 축적.">Data advantage from runtime. Custom volatility models beyond EWMA. First-mover position in V4 hook ecosystem. Continuous audit track record.</p>
+          <div class="items">
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">Data moat: longer runtime = more accurate vol oracle</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">Custom vol models: implied vol (Deribit), realized vol blend, ML prediction</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">V4 hook ecosystem first-mover advantage</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">Network effects: TVL ↑ → better performance → more deposits</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">Continuous audit + unbroken runtime as trust signal</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase reveal">
+        <div>
+          <div class="phase-label" data-ko="페이즈 07">Phase 07</div>
+          <div class="phase-name" data-ko="거버넌스">Governance</div>
+          <div class="phase-status status-wait" data-ko="예정">Upcoming</div>
+        </div>
+        <div class="phase-body">
+          <p class="phase-desc" data-ko="PMF 확인 및 TVL $5M 초과 후에만 토큰 결정. 그전까지 순수 수익 모델 — 규제 간소화, 운영 집중.">Token decision only after product-market fit confirmed and TVL exceeds $5M. Pure revenue model until then — simpler regulatory, operational focus.</p>
+          <div class="items">
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">PMF confirmation: TVL $5M+, 10+ external depositors, 6mo+ no incidents</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">Token vs no-token decision</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">If token: community participation, incentive alignment, liquidity bootstrap</div></div></div>
+            <div class="item"><div class="item-icon icon-pending"></div><div><div class="text-pending">If no token: pure revenue model, simpler regulatory path</div></div></div>
           </div>
         </div>
       </div>
@@ -383,55 +462,6 @@
         <tr class="ours"><td class="name">IL Alpha</td><td class="action" data-ko="LP 완전 제거">Remove LP entirely</td><td class="result" data-ko="제로">Zero</td></tr>
       </tbody>
     </table>
-  </div>
-</section>
-
-<section class="section-light" id="log">
-  <div class="section-inner">
-    <div class="section-eyebrow" data-ko="빌드 로그">Build Log</div>
-    <h2 class="section-title reveal" data-ko="오늘 우리가 한 일">What we shipped</h2>
-    
-      <div class="log-day reveal">
-        <div class="log-date">2026-03-19</div>
-        <div class="log-entries">
-          <div class="log-entry">
-            <div class="log-cat" data-ko="개발">&#9670; Development</div>
-            <div class="log-title" data-ko="Phase 2 → 3 완료. LP 활성화 성공.">Phase 2 → 3 Complete. LP Activated.</div>
-            <ul class="log-items">
-              <li data-ko="Solidity 컨트랙트 완성: ILAlphaHook (V4 hook + EWMA 변동성 오라클), ILAlphaVault (ERC-4626), BaseVault, 대조군 2개. 44 → 65 테스트 전부 통과.">Solidity contracts complete: ILAlphaHook (V4 hook + EWMA vol oracle), ILAlphaVault (ERC-4626), BaseVault, 2 control vaults. 44 → 65 tests, all passing.</li>
-              <li data-ko="Ethereum Sepolia 배포 — 3회 시도. 문제: Sepolia에 V4 PoolManager 미배포. 해결: 자체 PoolManager 배포.">Deployed to Ethereum Sepolia — 3 attempts. Problem: V4 PoolManager not available on Sepolia. Solution: deployed our own PoolManager.</li>
-              <li data-ko="CREATE2 hook 배포 실패 — owner가 proxy 주소. 수정: constructor에 owner 파라미터 추가.">CREATE2 hook deployment failed — owner was proxy address. Fix: added explicit owner parameter to constructor.</li>
-              <li data-ko="키퍼 봇 가동 (1시간 간격). 첫 사이클: feeYield &gt; ilCost → LP ON. 100K tUSDC가 V4 풀에 배포됨.">Keeper bot live (1hr intervals). First cycle: feeYield &gt; ilCost → LP ON. 100K tUSDC deployed to V4 pool.</li>
-              <li data-ko="SwapHelper 배포로 테스트넷 볼륨 생성. CSV 메트릭 로깅 추가.">SwapHelper deployed for testnet volume generation. CSV metrics logging added.</li>
-              
-            </ul>
-          </div>
-          <div class="log-entry">
-            <div class="log-cat" data-ko="전략">&#9671; Strategy</div>
-            <div class="log-title" data-ko="포지셔닝 확정. Arrakis 분석 완료.">Positioning Locked. Arrakis Analyzed.</div>
-            <ul class="log-items">
-              <li data-ko="우리는 아님: 스테이킹 대안, 렌딩 대안, 유동성 보장. 우리임: 15%+ 수익을 원하는 자본을 위한 IL 방어 LP 관리.">We are NOT: staking alt, lending alt, liquidity guarantee. We ARE: IL-defended LP management for capital seeking 15%+ returns.</li>
-              <li data-ko="새 토큰 프로젝트 = 최고 ROI 세그먼트. 피치: &#x27;트레저리가 6개월 대신 12개월 유지.&#x27; &#x27;유동성 공급&#x27;이 아님.">New token projects identified as highest ROI segment. Pitch: &#x27;your treasury lasts 12mo instead of 6mo.&#x27; NOT &#x27;we supply liquidity.&#x27;</li>
-              <li data-ko="Arrakis 심층 분석: B2B 동적 수수료 (LP 유지) vs 우리 B2C LP 제거 (IL = 0). 시장 안 겹침.">Arrakis deep dive: B2B dynamic fees (keeps LP in) vs our B2C LP removal (IL = 0). Markets don&#x27;t overlap.</li>
-              <li data-ko="생존 확률: $10K→$1M 약 17%. 메인넷 Day 1에 첫 고객 확보 필수 (Arrakis 플레이북).">Survival math: $10K→$1M probability ~17%. Must secure Day 1 customer at mainnet launch (Arrakis playbook).</li>
-              <li data-ko="수수료 구조 확정: Stage 1 = 성과보수 10%, 관리보수 0%. 수익 없으면 수수료 0원.">Fee structure finalized: Stage 1 = 10% performance, 0% management. No fees if no profit.</li>
-              
-            </ul>
-          </div>
-          <div class="log-entry">
-            <div class="log-cat" data-ko="디자인 &amp; 홍보">&#9672; Design &amp; Marketing</div>
-            <div class="log-title" data-ko="디자인 시스템 + 공개 사이트 라이브.">Design System + Public Site Live.</div>
-            <ul class="log-items">
-              <li data-ko="경쟁사 비주얼 리서치: Arrakis, Lido, EigenLayer, Sommelier 스크린샷 + 분석.">Competitive visual research: Arrakis, Lido, EigenLayer, Sommelier screenshotted and analyzed.</li>
-              <li data-ko="디자인 시스템 생성 (DESIGN.md). 방향: Blackstone 스타일 기관 금융. Playfair Display + Satoshi + Geist Mono.">Design system created (DESIGN.md). Direction: Blackstone-inspired institutional finance. Playfair Display + Satoshi + Geist Mono.</li>
-              <li data-ko="마일스톤 페이지 빌드 파이프라인: roadmap.json → build.py → index.html. 컨트랙트별 Etherscan 실시간 tx count.">Milestone page built with build.py pipeline: roadmap.json → index.html. Live Etherscan tx count per contract.</li>
-              <li data-ko="GitHub Pages 배포: official-belta.github.io/il-alpha-site. 지구본 드롭다운으로 한영 전환.">Deployed to GitHub Pages: official-belta.github.io/il-alpha-site. English/Korean toggle with globe dropdown.</li>
-              <li data-ko="이름 변경: &#x27;IL Alpha Vault&#x27; → &#x27;IL Alpha&#x27;. Vault는 너무 일반적 — 우리는 프로토콜.">Name changed: &#x27;IL Alpha Vault&#x27; → &#x27;IL Alpha&#x27;. Vault is generic — we&#x27;re a protocol, not a container.</li>
-              
-            </ul>
-          </div>
-        </div>
-      </div>
   </div>
 </section>
 
