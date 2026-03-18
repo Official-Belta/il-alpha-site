@@ -139,6 +139,16 @@
   .comp-table .ours .action { color: var(--accent); }
   .comp-table .ours .result { color: var(--accent); font-weight: 700; font-size: 16px; }
 
+  .log-day { padding: 48px 0; border-top: 1px solid var(--gray-200); }
+  .log-date { font-family: var(--mono); font-size: 13px; color: var(--gray-500); letter-spacing: 0.06em; margin-bottom: 32px; }
+  .log-entries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 768px) { .log-entries { grid-template-columns: 1fr; } }
+  .log-entry { padding: 28px; background: var(--gray-100); border-radius: 8px; }
+  .log-cat { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 12px; }
+  .log-title { font-family: var(--sans); font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.3; }
+  .log-items { padding-left: 18px; display: flex; flex-direction: column; gap: 10px; }
+  .log-items li { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+
   .cta { background: var(--black); color: var(--white); padding: 120px 48px; }
   @media (max-width: 640px) { .cta { padding: 80px 24px; } }
   .cta h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(36px,5vw,56px); letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 24px; max-width: 600px; }
@@ -165,6 +175,7 @@
   <div class="nav-links">
     <a href="#roadmap" class="hm" data-ko="로드맵">Roadmap</a>
     <a href="#contracts" class="hm" data-ko="컨트랙트">Contracts</a>
+    <a href="#log" class="hm" data-ko="빌드 로그">Log</a>
     <span class="nav-status" data-ko="테스트넷 라이브">Testnet Live</span>
     <div style="position:relative;">
       <button class="lang-btn" onclick="document.querySelector('.lang-dropdown').classList.toggle('open')">
@@ -372,6 +383,55 @@
         <tr class="ours"><td class="name">IL Alpha</td><td class="action" data-ko="LP 완전 제거">Remove LP entirely</td><td class="result" data-ko="제로">Zero</td></tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+<section class="section-light" id="log">
+  <div class="section-inner">
+    <div class="section-eyebrow" data-ko="빌드 로그">Build Log</div>
+    <h2 class="section-title reveal" data-ko="오늘 우리가 한 일">What we shipped</h2>
+    
+      <div class="log-day reveal">
+        <div class="log-date">2026-03-19</div>
+        <div class="log-entries">
+          <div class="log-entry">
+            <div class="log-cat" data-ko="개발">&#9670; Development</div>
+            <div class="log-title" data-ko="Phase 2 → 3 완료. LP 활성화 성공.">Phase 2 → 3 Complete. LP Activated.</div>
+            <ul class="log-items">
+              <li data-ko="Solidity 컨트랙트 완성: ILAlphaHook (V4 hook + EWMA 변동성 오라클), ILAlphaVault (ERC-4626), BaseVault, 대조군 2개. 44 → 65 테스트 전부 통과.">Solidity contracts complete: ILAlphaHook (V4 hook + EWMA vol oracle), ILAlphaVault (ERC-4626), BaseVault, 2 control vaults. 44 → 65 tests, all passing.</li>
+              <li data-ko="Ethereum Sepolia 배포 — 3회 시도. 문제: Sepolia에 V4 PoolManager 미배포. 해결: 자체 PoolManager 배포.">Deployed to Ethereum Sepolia — 3 attempts. Problem: V4 PoolManager not available on Sepolia. Solution: deployed our own PoolManager.</li>
+              <li data-ko="CREATE2 hook 배포 실패 — owner가 proxy 주소. 수정: constructor에 owner 파라미터 추가.">CREATE2 hook deployment failed — owner was proxy address. Fix: added explicit owner parameter to constructor.</li>
+              <li data-ko="키퍼 봇 가동 (1시간 간격). 첫 사이클: feeYield &gt; ilCost → LP ON. 100K tUSDC가 V4 풀에 배포됨.">Keeper bot live (1hr intervals). First cycle: feeYield &gt; ilCost → LP ON. 100K tUSDC deployed to V4 pool.</li>
+              <li data-ko="SwapHelper 배포로 테스트넷 볼륨 생성. CSV 메트릭 로깅 추가.">SwapHelper deployed for testnet volume generation. CSV metrics logging added.</li>
+              
+            </ul>
+          </div>
+          <div class="log-entry">
+            <div class="log-cat" data-ko="전략">&#9671; Strategy</div>
+            <div class="log-title" data-ko="포지셔닝 확정. Arrakis 분석 완료.">Positioning Locked. Arrakis Analyzed.</div>
+            <ul class="log-items">
+              <li data-ko="우리는 아님: 스테이킹 대안, 렌딩 대안, 유동성 보장. 우리임: 15%+ 수익을 원하는 자본을 위한 IL 방어 LP 관리.">We are NOT: staking alt, lending alt, liquidity guarantee. We ARE: IL-defended LP management for capital seeking 15%+ returns.</li>
+              <li data-ko="새 토큰 프로젝트 = 최고 ROI 세그먼트. 피치: &#x27;트레저리가 6개월 대신 12개월 유지.&#x27; &#x27;유동성 공급&#x27;이 아님.">New token projects identified as highest ROI segment. Pitch: &#x27;your treasury lasts 12mo instead of 6mo.&#x27; NOT &#x27;we supply liquidity.&#x27;</li>
+              <li data-ko="Arrakis 심층 분석: B2B 동적 수수료 (LP 유지) vs 우리 B2C LP 제거 (IL = 0). 시장 안 겹침.">Arrakis deep dive: B2B dynamic fees (keeps LP in) vs our B2C LP removal (IL = 0). Markets don&#x27;t overlap.</li>
+              <li data-ko="생존 확률: $10K→$1M 약 17%. 메인넷 Day 1에 첫 고객 확보 필수 (Arrakis 플레이북).">Survival math: $10K→$1M probability ~17%. Must secure Day 1 customer at mainnet launch (Arrakis playbook).</li>
+              <li data-ko="수수료 구조 확정: Stage 1 = 성과보수 10%, 관리보수 0%. 수익 없으면 수수료 0원.">Fee structure finalized: Stage 1 = 10% performance, 0% management. No fees if no profit.</li>
+              
+            </ul>
+          </div>
+          <div class="log-entry">
+            <div class="log-cat" data-ko="디자인 &amp; 홍보">&#9672; Design &amp; Marketing</div>
+            <div class="log-title" data-ko="디자인 시스템 + 공개 사이트 라이브.">Design System + Public Site Live.</div>
+            <ul class="log-items">
+              <li data-ko="경쟁사 비주얼 리서치: Arrakis, Lido, EigenLayer, Sommelier 스크린샷 + 분석.">Competitive visual research: Arrakis, Lido, EigenLayer, Sommelier screenshotted and analyzed.</li>
+              <li data-ko="디자인 시스템 생성 (DESIGN.md). 방향: Blackstone 스타일 기관 금융. Playfair Display + Satoshi + Geist Mono.">Design system created (DESIGN.md). Direction: Blackstone-inspired institutional finance. Playfair Display + Satoshi + Geist Mono.</li>
+              <li data-ko="마일스톤 페이지 빌드 파이프라인: roadmap.json → build.py → index.html. 컨트랙트별 Etherscan 실시간 tx count.">Milestone page built with build.py pipeline: roadmap.json → index.html. Live Etherscan tx count per contract.</li>
+              <li data-ko="GitHub Pages 배포: official-belta.github.io/il-alpha-site. 지구본 드롭다운으로 한영 전환.">Deployed to GitHub Pages: official-belta.github.io/il-alpha-site. English/Korean toggle with globe dropdown.</li>
+              <li data-ko="이름 변경: &#x27;IL Alpha Vault&#x27; → &#x27;IL Alpha&#x27;. Vault는 너무 일반적 — 우리는 프로토콜.">Name changed: &#x27;IL Alpha Vault&#x27; → &#x27;IL Alpha&#x27;. Vault is generic — we&#x27;re a protocol, not a container.</li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
   </div>
 </section>
 
