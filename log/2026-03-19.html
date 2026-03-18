@@ -18,6 +18,13 @@
   .nav-links { display:flex; align-items:center; gap:28px; }
   .nav-links a { font-size:15px; font-weight:500; color:var(--gray-600); text-decoration:none; transition:color 300ms var(--ease); }
   .nav-links a:hover { color:var(--black); }
+  .nav-links a.active { color:var(--black); }
+  .hamburger { display:none; background:none; border:none; cursor:pointer; padding:8px; color:var(--gray-600); }
+  .hamburger svg { width:24px; height:24px; }
+  .mobile-menu { display:none; position:fixed; top:64px; left:0; right:0; background:var(--white); border-bottom:1px solid var(--gray-200); padding:16px 24px; z-index:99; flex-direction:column; gap:16px; }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a { font-size:16px; font-weight:500; color:var(--gray-600); text-decoration:none; padding:8px 0; }
+  @media (max-width:640px) { .nav-links a.hm { display:none; } .hamburger { display:block; } }
   .lang-btn { position:relative; display:flex; align-items:center; gap:6px; font-family:var(--sans); font-size:14px; font-weight:500; color:var(--gray-500); background:transparent; border:1px solid var(--gray-200); border-radius:100px; padding:6px 14px; cursor:pointer; transition:all 200ms var(--ease); }
   .lang-btn:hover { color:var(--black); border-color:var(--gray-400); }
   .lang-btn svg { width:16px; height:16px; }
@@ -36,10 +43,10 @@
 
   .detail-section { padding:64px 48px; border-top:1px solid var(--gray-200); max-width:760px; }
   @media (max-width:640px) { .detail-section { padding:48px 24px; } }
-  .detail-cat { font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); margin-bottom:14px; }
-  .detail-title { font-family:var(--serif); font-size:clamp(28px,4vw,40px); font-weight:400; letter-spacing:-0.02em; margin-bottom:32px; line-height:1.2; }
-  .detail-items { padding-left:20px; display:flex; flex-direction:column; gap:20px; }
-  .detail-items li { font-size:17px; color:var(--gray-600); line-height:1.75; }
+  .detail-cat { font-family:var(--mono); font-size:16px; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); margin-bottom:16px; font-weight:500; }
+  .detail-title { font-family:var(--serif); font-size:clamp(32px,5vw,48px); font-weight:400; letter-spacing:-0.02em; margin-bottom:36px; line-height:1.2; }
+  .detail-items { padding-left:20px; display:flex; flex-direction:column; gap:24px; }
+  .detail-items li { font-size:18px; color:var(--gray-600); line-height:1.8; }
 
   footer { padding:32px 48px; border-top:1px solid var(--gray-200); }
   footer span { font-family:var(--mono); font-size:11px; color:var(--gray-500); }
@@ -49,7 +56,13 @@
 <nav>
   <a class="logo" href="../index.html">IL Alpha</a>
   <div class="nav-links">
-    <a href="../index.html" data-ko="메인">Home</a>
+    <a href="../index.html#roadmap" class="hm" data-ko="로드맵">Roadmap</a>
+    <a href="../index.html#contracts" class="hm" data-ko="컨트랙트">Contracts</a>
+    <a href="../index.html#log" class="hm active" data-ko="빌드 로그">Log</a>
+    <a href="../thesis.html" class="hm" data-ko="투자 논문">Thesis</a>
+    <button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
     <div style="position:relative;">
       <button class="lang-btn" onclick="document.querySelector('.lang-dropdown').classList.toggle('open')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -62,6 +75,13 @@
     </div>
   </div>
 </nav>
+
+<div class="mobile-menu">
+  <a href="../index.html#roadmap" data-ko="로드맵" onclick="this.parentElement.classList.remove('open')">Roadmap</a>
+  <a href="../index.html#contracts" data-ko="컨트랙트" onclick="this.parentElement.classList.remove('open')">Contracts</a>
+  <a href="../index.html#log" data-ko="빌드 로그" onclick="this.parentElement.classList.remove('open')">Log</a>
+  <a href="../thesis.html" data-ko="투자 논문">Thesis</a>
+</div>
 
 <section class="hero">
   <a class="hero-back" href="../index.html">&larr; <span data-ko="메인으로 돌아가기">Back to home</span></a>
